@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực - DrinkStore</title>
+    <link rel="stylesheet" href="/login-assets/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-page-container">
+        <div class="auth-form-wrapper">
+            <!-- Login Form -->
+            <div class="auth-form-container" id="loginContainer">
+                <form id="loginForm" class="auth-form">
+                    <div class="auth-header">
+                        <h2><i class="fas fa-store"></i> DrinkStore</h2>
+                        <h3>Đăng Nhập</h3>
+                    </div>
+                    <div id="loginMessage" class="message-div" style="display: none;"></div>
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Tên đăng nhập</label>
+                        <input type="text" id="loginUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Mật khẩu</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-sign-in-alt"></i> Đăng Nhập
+                    </button>
+                    <p class="toggle-link">Chưa có tài khoản? <a href="#" id="switchToRegister">Đăng ký ngay</a></p>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container" id="registerContainer">
+                <form id="registerForm" class="auth-form">
+                     <div class="auth-header">
+                        <h2><i class="fas fa-store"></i> DrinkStore</h2>
+                        <h3>Đăng Ký</h3>
+                    </div>
+                    <div id="registerMessage" class="message-div" style="display: none;"></div>
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user"></i> Tên đăng nhập</label>
+                        <input type="text" id="registerUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-lock"></i> Mật khẩu</label>
+                        <input type="password" id="registerPassword" name="password" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Xác nhận mật khẩu</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role"><i class="fas fa-user-tag"></i> Vai trò</label>
+                        <select id="role" name="role" required>
+                            <option value="staff">Nhân viên (Staff)</option>
+                            <option value="admin">Quản trị viên (Admin)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-user-plus"></i> Đăng Ký
+                    </button>
+                    <p class="toggle-link">Đã có tài khoản? <a href="#" id="switchToLogin">Đăng nhập</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/login-assets/js/auth_script.js"></script>
+</body>
+</html>

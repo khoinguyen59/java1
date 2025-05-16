@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm - Drink Store Admin</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS cơ bản cho Modal */
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px 30px; border: 1px solid #888; width: 60%; max-width: 600px; border-radius: 8px; position: relative; }
+        .modal-content h3 { margin-top: 0; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .modal-content input[type="text"], .modal-content input[type="number"], .modal-content select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .modal-content .form-actions { text-align: right; margin-top: 20px; }
+        .modal-content .form-actions .btn { margin-left: 10px; }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; top: 10px; right: 15px; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <!-- Sidebar và Topbar giữ nguyên -->
+    <div class="sidebar">
+        <div class="logo-details"><i class="fas fa-mug-hot logo-icon"></i><span class="logo_name">DrinkAdmin</span></div>
+        <ul class="nav-links">
+            <li id="nav-li-dashboard"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span class="link_name">Dashboard</span></a></li>
+            <li id="nav-li-home"><a href="home_introduction.html"><i class="fas fa-home"></i><span class="link_name">Trang Chủ</span></a></li>
+            <li id="nav-li-products"><a href="products.html"><i class="fas fa-wine-bottle"></i><span class="link_name">Sản Phẩm</span></a></li>
+            <li id="nav-li-sales"><a href="sales.html"><i class="fas fa-chart-line"></i><span class="link_name">Doanh Số</span></a></li>
+            <li id="nav-li-customers"><a href="customers.html"><i class="fas fa-users"></i><span class="link_name">Khách Hàng</span></a></li>
+            <li id="nav-li-staff"><a href="staff.html"><i class="fas fa-user-tie"></i><span class="link_name">Nhân Viên</span></a></li>
+            <li id="nav-li-promotions"><a href="promotions.html"><i class="fas fa-tags"></i><span class="link_name">Khuyến Mãi</span></a></li>
+            <li><div class="profile-details"><a href="#"><i class="fas fa-sign-out-alt"></i><span class="link_name">Đăng Xuất</span></a></div></li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button"><i class="fas fa-bars sidebarBtn"></i><span class="dashboard-title">Quản Lý Sản Phẩm</span></div>
+            <div class="search-box"><input type="text" placeholder="Tìm kiếm..."><i class="fas fa-search"></i></div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification"><i class="fas fa-bell"></i><span class="badge">5</span></div>
+                 <div class="action-item message"><i class="fas fa-envelope"></i><span class="badge">3</span></div>
+                <div class="profile-dropdown">
+                    <img src="src/assets/img/admin.webp" alt="Profile Picture" class="profile-pic">
+                    <span class="admin_name">Admin</span><i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content page-content-table">
+            <h2>Quản Lý Sản Phẩm</h2>
+            <div class="actions">
+                <button class="btn btn-primary" id="btnAddProduct"><i class="fas fa-plus"></i> Thêm Sản Phẩm</button>
+                <button class="btn btn-success" id="btnExportExcel"><i class="fas fa-file-excel"></i> Xuất Excel</button>
+                <button class="btn btn-info" id="btnRefreshProducts"><i class="fas fa-sync-alt"></i> Làm Mới</button>
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." class="search-input" id="searchProductInput">
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã SP</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Danh Mục</th>
+                        <th>Giá Bán (VNĐ)</th>
+                        <th>Trạng Thái</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                     <!-- Dữ liệu sẽ được JavaScript chèn vào đây -->
+                     <tr><td colspan="6" style="text-align:center;">Đang tải dữ liệu...</td></tr>
+                </tbody>
+            </table>
+             <div class="pagination" id="paginationControls">
+                <!-- Các nút phân trang sẽ được JavaScript chèn vào đây -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Thêm/Sửa Sản Phẩm -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalBtn">×</span>
+            <h3 id="modalTitle">Thêm Sản Phẩm Mới</h3>
+            <form id="productForm">
+                <input type="hidden" id="productId" name="productId">
+                <div>
+                    <label for="maSPModal">Mã SP:</label>
+                    <input type="text" id="maSPModal" name="maSP" required>
+                </div>
+                <div>
+                    <label for="tenSanPhamModal">Tên Sản Phẩm:</label>
+                    <input type="text" id="tenSanPhamModal" name="tenSanPham" required>
+                </div>
+                <div>
+                    <label for="danhMucModal">Danh Mục:</label>
+                    <input type="text" id="danhMucModal" name="danhMuc" required>
+                </div>
+                <div>
+                    <label for="giaBanModal">Giá Bán (VNĐ):</label>
+                    <input type="number" id="giaBanModal" name="giaBan" required min="0">
+                </div>
+                <div>
+                    <label for="trangThaiModal">Trạng Thái:</label>
+                    <select id="trangThaiModal" name="trangThai" required>
+                        <option value="Đang bán">Đang bán</option>
+                        <option value="Ngừng bán">Ngừng bán</option>
+                        <option value="Hết hàng">Hết hàng</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn" id="cancelModalBtn" style="background-color: #ddd; color: #333;">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/pages/products.js"></script>
+    <script>
+        // Script nhỏ để thêm class active cho mục menu hiện tại (đã có)
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeNavItem = document.getElementById('nav-li-products');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

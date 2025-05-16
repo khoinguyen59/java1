@@ -1,0 +1,341 @@
+/* src/css/common.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --text-color-light: #ecf0f1;
+    --text-color-dark: #2c3e50;
+    --background-light: #f4f6f9;
+    --background-white: #ffffff;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --info-color: #3498db;
+    --grey-color: #bdc3c7;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--background-light);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background: var(--primary-color);
+    z-index: 100;
+    transition: all 0.3s ease;
+    color: var(--text-color-light);
+}
+/* ... (Toàn bộ CSS cho .sidebar, .logo-details, .nav-links, .profile-details, .sidebar.close) ... */
+/* (Lấy từ file style.css tổng hợp trước đó) */
+.sidebar .logo-details { height: 60px; display: flex; align-items: center; padding-left: 20px; background: var(--secondary-color); }
+.sidebar .logo-details .logo-icon { font-size: 28px; margin-right: 10px; }
+.sidebar .logo-details .logo_name { font-size: 22px; font-weight: 600; }
+.sidebar .nav-links { height: calc(100% - 100px); padding-top: 20px; list-style: none; overflow-y: auto; }
+.sidebar .nav-links::-webkit-scrollbar { display: none; }
+.sidebar .nav-links { -ms-overflow-style: none; scrollbar-width: none; }
+.sidebar .nav-links li { position: relative; list-style: none; transition: all 0.4s ease; }
+.sidebar .nav-links li:hover { background: var(--secondary-color); }
+.sidebar .nav-links li a { display: flex; align-items: center; text-decoration: none; padding: 12px 20px; color: var(--text-color-light); transition: all 0.3s ease; width: 100%; }
+.sidebar .nav-links li a i { font-size: 18px; min-width: 40px; text-align: center; }
+.sidebar .nav-links li a .link_name { font-size: 16px; font-weight: 400; white-space: nowrap; opacity: 1; transition: opacity 0.3s ease; }
+.sidebar .nav-links li.active { background: var(--accent-color); }
+.sidebar .nav-links li.active a { color: var(--background-white); }
+.sidebar .profile-details { position: absolute; bottom: 0; width: 100%; background: var(--secondary-color); padding: 5px 0; }
+.sidebar .profile-details a { display: flex; align-items: center; text-decoration: none; padding: 8px 20px; color: var(--text-color-light); width: 100%; transition: background 0.3s ease; }
+.sidebar .profile-details a:hover { background: var(--primary-color); }
+.sidebar .profile-details i { font-size: 18px; min-width: 40px; text-align: center; }
+.sidebar .profile-details .link_name { font-size: 15px; font-weight: 400; white-space: nowrap; opacity: 1; transition: opacity 0.3s ease; }
+.sidebar.close { width: 78px; }
+.sidebar.close .logo-details .logo_name,
+.sidebar.close .nav-links li a .link_name,
+.sidebar.close .profile-details .link_name { opacity: 0; pointer-events: none; }
+
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    /* ... (Toàn bộ CSS cho .top-bar, .sidebar-button, .search-box, .top-bar-actions, .profile-dropdown) ... */
+    justify-content: space-between; align-items: center; height: 60px; background: var(--background-white); padding: 0 20px; box-shadow: 0 2px 4px var(--shadow-color); position: sticky; top: 0; z-index: 50;
+}
+/* (Lấy từ file style.css tổng hợp trước đó) */
+.top-bar .sidebar-button { display: flex; align-items: center; font-size: 24px; cursor: pointer; color: var(--text-color-dark); }
+.top-bar .sidebar-button .dashboard-title { font-size: 20px; font-weight: 600; margin-left: 15px; color: var(--text-color-dark); }
+.top-bar .search-box { position: relative; }
+.top-bar .search-box input { height: 40px; width: 250px; border-radius: 6px; border: 1px solid var(--grey-color); padding: 0 15px 0 40px; font-size: 15px; outline: none; }
+.top-bar .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--grey-color); }
+.top-bar-actions { display: flex; align-items: center; }
+.action-item { position: relative; margin-left: 20px; cursor: pointer; }
+.action-item i { font-size: 22px; color: var(--text-color-dark); }
+.action-item .badge { position: absolute; top: -5px; right: -8px; background-color: var(--danger-color); color: white; font-size: 10px; padding: 2px 5px; border-radius: 50%; font-weight: 600; }
+.profile-dropdown { position: relative; display: flex; align-items: center; margin-left: 25px; cursor: pointer; }
+.profile-pic { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
+.admin_name { font-weight: 500; margin-right: 5px; color: var(--text-color-dark); }
+.dropdown-icon { font-size: 14px; color: var(--grey-color); }
+.dropdown-content { display: none; position: absolute; top: 110%; right: 0; background-color: var(--background-white); min-width: 160px; box-shadow: 0 4px 8px var(--shadow-color); border-radius: 6px; z-index: 1; overflow: hidden; }
+.dropdown-content a { color: var(--text-color-dark); padding: 12px 16px; text-decoration: none; display: flex; align-items: center; font-size: 15px; }
+.dropdown-content a i { margin-right: 10px; color: var(--secondary-color); width: 20px; text-align: center; }
+.dropdown-content a:hover { background-color: var(--background-light); }
+.profile-dropdown:hover .dropdown-content { display: block; }
+
+
+/* General Layout */
+.home-section {
+    position: relative;
+    /* ... (CSS cho .home-section, .sidebar.close ~ .home-section) ... */
+    background: var(--background-light); min-height: 100vh; width: calc(100% - 260px); left: 260px; transition: all 0.3s ease;
+}
+.sidebar.close ~ .home-section { left: 78px; width: calc(100% - 78px); }
+
+.home-content { /* Style chung cho .home-content của tất cả các trang */
+    padding: 20px;
+}
+.home-content h2 { /* Style chung cho H2 đầu tiên trong .home-content */
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+}
+
+/* Common Components (nếu muốn đặt ở đây) */
+.btn {
+    padding: 8px 15px;
+    /* ... (Toàn bộ CSS cho .btn và các biến thể .btn-primary, .btn-success, etc.) ... */
+    /* ... (Lấy từ file style.css tổng hợp trước đó) ... */
+    border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; color: var(--background-white); display: inline-flex; align-items: center; gap: 5px; text-decoration: none; line-height: 1.5;
+}
+.btn:hover { box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+.btn i { font-size: 0.9em; }
+.btn-primary { background-color: var(--accent-color); }
+.btn-primary:hover { background-color: #2980b9; }
+.btn-success { background-color: var(--success-color); }
+.btn-success:hover { background-color: #27ae60; }
+.btn-info { background-color: var(--info-color); }
+.btn-info:hover { background-color: #2980b9; }
+.btn-warning { background-color: var(--warning-color); }
+.btn-warning:hover { background-color: #d35400; }
+.btn-danger { background-color: var(--danger-color); }
+.btn-danger:hover { background-color: #c0392b; }
+
+.status {
+    padding: 4px 10px;
+    /* ... (CSS cho .status và các biến thể .active, .inactive) ... */
+    /* ... (Lấy từ file style.css tổng hợp trước đó) ... */
+    border-radius: 12px; font-size: 12px; font-weight: 500; text-transform: capitalize; display: inline-block; white-space: nowrap;
+}
+.status.active { background-color: rgba(46, 204, 113, 0.15); color: #239958; }
+.status.inactive { background-color: rgba(231, 76, 60, 0.15); color: #c0392b; }
+.status.pending { background-color: rgba(243, 156, 18, 0.15); color: #d35400; }
+
+/* Basic box styling (nếu áp dụng rất chung) */
+.box {
+    background: var(--background-white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Responsive Media Queries chung (nếu có) */
+@media (max-width: 768px) {
+    .top-bar .search-box {
+        display: none;
+    }
+}
+@media (max-width: 576px) {
+    .top-bar .profile-dropdown .admin_name {
+        display: none;
+    }
+}
+
+.page-content-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--background-white);
+    box-shadow: 0 1px 3px var(--shadow-color); /* Shadow nhẹ hơn cho bảng trong box */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.page-content-table th,
+.page-content-table td {
+    padding: 10px 12px; /* Giảm padding một chút cho các bảng con */
+    text-align: left;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 14px;
+    vertical-align: middle;
+    color: var(--text-color-dark);
+}
+
+.page-content-table thead th {
+    background-color: #f9f9f9; /* Nền header bảng */
+    font-weight: 500;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+.page-content-table thead tr:first-child th:first-child { border-top-left-radius: 8px; }
+.page-content-table thead tr:first-child th:last-child { border-top-right-radius: 8px; }
+
+.page-content-table tbody tr:hover {
+    background-color: #f1f3f5;
+}
+.page-content-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.page-content-table tbody tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+.page-content-table tbody tr:last-child td:last-child { border-bottom-right-radius: 8px; }
+
+/* --- Action Buttons in Table (Đã có, đảm bảo nó ở đây) --- */
+.btn-action { /* Selector này phải đủ chung */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px 8px;
+    margin: 0 3px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: var(--grey-color);
+}
+.btn-action:hover { background-color: var(--background-light); }
+.btn-action.btn-view:hover { color: var(--info-color); }
+.btn-action.btn-edit:hover { color: var(--warning-color); }
+.btn-action.btn-delete:hover { color: var(--danger-color); }
+
+
+/* --- Pagination (CHUNG - nếu nhiều bảng có phân trang giống nhau) --- */
+.page-content-table .pagination {
+    margin-top: 20px; /* Giảm chút nếu bảng gần pagination */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.page-content-table .pagination a {
+    color: var(--secondary-color);
+    padding: 8px 12px; /* Điều chỉnh padding nút pagination */
+    text-decoration: none;
+    transition: background-color .3s, color .3s, border-color .3s;
+    border: 1px solid var(--grey-color);
+    margin: 0 3px;
+    border-radius: 4px;
+    font-size: 13px; /* Giảm font chữ pagination */
+    font-weight: 500;
+}
+.page-content-table .pagination a.active {
+    background-color: var(--accent-color);
+    color: white;
+    border: 1px solid var(--accent-color);
+    cursor: default;
+}
+.page-content-table .pagination a:hover:not(.active) {
+    background-color: var(--background-light);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* --- Top Sales List Style (CHUNG - nếu nhiều trang có kiểu danh sách này) --- */
+/* Nếu .box đã có style chung, chỉ cần style cho ul, li bên trong */
+.box .top-sales-list ul, /* Áp dụng cho ul có class top-sales-list bên trong một .box */
+.box ul.top-sales-details { /* Hoặc dùng class top-sales-details như Dashboard */
+    list-style: none;
+    padding: 0;
+    margin-top: 10px; /* Thêm khoảng cách nếu cần */
+}
+.box .top-sales-list ul li,
+.box ul.top-sales-details li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--background-light);
+    font-size: 14px;
+}
+.box .top-sales-list ul li:last-child,
+.box ul.top-sales-details li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.box .top-sales-list ul li .product,
+.box ul.top-sales-details li .product {
+    font-weight: 500;
+    color: var(--text-color-dark);
+}
+.box .top-sales-list ul li .price,
+.box ul.top-sales-details li .price {
+    font-weight: 500;
+    color: var(--accent-color);
+    white-space: nowrap;
+}
+.box ul.top-sales-details li .currency { /* Nếu có thêm class currency */
+    font-size: 0.9em;
+    margin-left: 2px;
+}
+
+/* --- Responsive cho Table (CHUNG - nếu muốn áp dụng data-label cho tất cả table trong .page-content-table) --- */
+@media (max-width: 768px) {
+    .page-content-table .actions { /* Style này đã có trong sales.css, có thể để ở common.css */
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .page-content-table .search-input { /* Style này đã có trong sales.css, có thể để ở common.css */
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .page-content-table table thead tr { /* Ẩn aheader gốc */
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .page-content-table table tr { /* Mỗi dòng là một block */
+        display: block;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        border-radius: 0; /* Bỏ border-radius của table cha */
+    }
+    .page-content-table table td { /* Mỗi cell là một block */
+        display: block;
+        border: none;
+        border-bottom: 1px solid #eee; /* Đường kẻ giữa các "trường" */
+        position: relative;
+        padding-left: 50% !important;
+        white-space: normal;
+        text-align: right !important;
+        min-height: 30px; /* Đảm bảo chiều cao tối thiểu */
+    }
+    .page-content-table table td:last-child {
+        border-bottom: none; /* Bỏ border cho "trường" cuối cùng của một "dòng" */
+    }
+    .page-content-table table td:before {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left !important;
+        font-weight: bold;
+        content: attr(data-label); /* Lấy label từ data-label của td */
+        color: var(--primary-color);
+    }
+}

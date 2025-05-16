@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Drink Store Admin</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="fas fa-mug-hot logo-icon"></i>
+            <span class="logo_name">DrinkAdmin</span>
+        </div>
+        <ul class="nav-links">
+            <li id="nav-li-dashboard"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span class="link_name">Dashboard</span></a></li>
+            <li id="nav-li-home"><a href="home_introduction.html"><i class="fas fa-home"></i><span class="link_name">Trang Chủ</span></a></li>
+            <li id="nav-li-products"><a href="products.html"><i class="fas fa-wine-bottle"></i><span class="link_name">Sản Phẩm</span></a></li>
+            <li id="nav-li-sales"><a href="sales.html"><i class="fas fa-chart-line"></i><span class="link_name">Doanh Số</span></a></li>
+            <li id="nav-li-customers"><a href="customers.html"><i class="fas fa-users"></i><span class="link_name">Khách Hàng</span></a></li>
+            <li id="nav-li-staff"><a href="staff.html"><i class="fas fa-user-tie"></i><span class="link_name">Nhân Viên</span></a></li>
+            <li id="nav-li-promotions"><a href="promotions.html"><i class="fas fa-tags"></i><span class="link_name">Khuyến Mãi</span></a></li>
+            <li>
+                <div class="profile-details">
+                    <a href="#"><i class="fas fa-sign-out-alt"></i><span class="link_name">Đăng Xuất</span></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button">
+                <i class="fas fa-bars sidebarBtn"></i>
+                <span class="dashboard-title">Dashboard</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">5</span>
+                 </div>
+                 <div class="action-item message">
+                     <i class="fas fa-envelope"></i>
+                     <span class="badge">3</span>
+                 </div>
+                <div class="profile-dropdown">
+                    <img src="assets/img/admin.webp" alt="Profile Picture" class="profile-pic">
+                    <span class="admin_name">Admin</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <!-- NỘI DUNG CHÍNH CỦA TRANG DASHBOARD -->
+            <div class="overview-boxes">
+                 <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Tổng Đơn Hàng (Hôm nay)</div>
+                        <div class="number">358</div>
+                        <div class="indicator">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="text">Tăng so với hôm qua</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-receipt cart one"></i>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Doanh Thu (Hôm nay)</div>
+                        <div class="number">5,100,678,000 đ</div>
+                        <div class="indicator">
+                            <i class="fas fa-arrow-up"></i>
+                            <span class="text">Tăng so với hôm qua</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-money-bill-wave cart two"></i>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Khách Hàng Mới (Tuần)</div>
+                        <div class="number">1763</div>
+                        <div class="indicator">
+                            <i class="fas fa-arrow-down"></i>
+                            <span class="text">Giảm so với tuần trước</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-user-plus cart three"></i>
+                </div>
+                 <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Tồn Kho SP</div>
+                        <div class="number">1,563,000</div>
+                         <div class="indicator">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="text">Một số sắp hết</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-boxes cart four"></i>
+                </div>
+            </div>
+
+            <div class="sales-boxes">
+                <div class="recent-sales box chart-container">
+                    <div class="title">Doanh Thu Theo Ngày (Tháng Hiện Tại)</div>
+                    <canvas id="dailyRevenueChart"></canvas>
+                </div>
+                <div class="top-sales box">
+                    <div class="title">Sản phẩm bán chạy nhất</div>
+                    <ul class="top-sales-details">
+                        <li>
+                            <a href="#"><span class="product">Cà Phê Muối</span></a>
+                            <span class="price">1,200,000,000 <span class="currency">đ</span></span>
+                        </li>
+                        <li>
+                            <a href="#"><span class="product">Trà Sữa Trân Châu</span></a>
+                            <span class="price">950,000,000 <span class="currency">đ</span></span>
+                        </li>
+                        <li>
+                            <a href="#"><span class="product">Nước Ép Cam</span></a>
+                            <span class="price">800,000,000 <span class="currency">đ</span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+             <div class="more-info-boxes">
+                 <div class="box monthly-revenue">
+                     <div class="title">Doanh Thu Tháng Này</div>
+                     <div class="revenue-value">158,000,123,000 đ</div>
+                     <div class="comparison">+5.2% so với tháng trước</div>
+                     <div class="progress-bar">
+                         <div class="progress" style="width: 75%;"></div>
+                     </div>
+                 </div>
+                 <div class="box whats-new">
+                     <div class="title">What's New</div>
+                     <ul>
+                        <li><i class="fas fa-check-circle"></i> Khuyến mãi hè mới được áp dụng.</li>
+                        <li><i class="fas fa-plus-circle"></i> Thêm món mới: Trà Chanh Giã Tay.</li>
+                        <li><i class="fas fa-bell"></i> Cập nhật giao diện quản lý v1.1.</li>
+                     </ul>
+                 </div>
+                 <div class="box latest-activity">
+                      <div class="title">Hoạt Động Gần Nhất</div>
+                      <ul>
+                         <li><i class="fas fa-user-edit"></i> Admin cập nhật sản phẩm "Cà Phê Đen".</li>
+                         <li><i class="fas fa-receipt"></i> Đơn hàng #1052 mới được tạo.</li>
+                         <li><i class="fas fa-star"></i> Khách hàng Nguyễn Văn A đánh giá 5 sao.</li>
+                      </ul>
+                 </div>
+             </div>
+
+             <div class="customer-reviews box">
+                <div class="title">Đánh giá gần đây</div>
+                <div class="reviews-grid">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="customer-name">Hoàng Thu Trang</span>
+                            <div class="stars">
+                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">"Trà sữa ổn, không quá ngọt. Nhân viên thân thiện. Sẽ ghé lại."</p>
+                    </div>
+                     <div class="review-item">
+                        <div class="review-header">
+                            <span class="customer-name">Bùi Anh Tuấn</span>
+                            <div class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">"Giá hơi cao so với khu vực. Đồ uống bình thường, không có gì đặc sắc lắm."</p>
+                    </div>
+                </div>
+             </div>
+            <!-- KẾT THÚC NỘI DUNG CHÍNH CỦA TRANG DASHBOARD -->
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+    <script>
+        // Script nhỏ để thêm class active cho mục menu hiện tại
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeNavItem = document.getElementById('nav-li-dashboard');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

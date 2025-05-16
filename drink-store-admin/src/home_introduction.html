@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Drink Store Admin</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/home_introduction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Trang này có thể không cần Chart.js, trừ khi bạn muốn thêm biểu đồ nhỏ nào đó -->
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="fas fa-mug-hot logo-icon"></i>
+            <span class="logo_name">DrinkAdmin</span>
+        </div>
+        <ul class="nav-links">
+            <li id="nav-li-dashboard"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span class="link_name">Dashboard</span></a></li>
+            <li id="nav-li-home"><a href="home_introduction.html"><i class="fas fa-home"></i><span class="link_name">Trang Chủ</span></a></li>
+            <li id="nav-li-products"><a href="products.html"><i class="fas fa-wine-bottle"></i><span class="link_name">Sản Phẩm</span></a></li>
+            <li id="nav-li-sales"><a href="sales.html"><i class="fas fa-chart-line"></i><span class="link_name">Doanh Số</span></a></li>
+            <li id="nav-li-customers"><a href="customers.html"><i class="fas fa-users"></i><span class="link_name">Khách Hàng</span></a></li>
+            <li id="nav-li-staff"><a href="staff.html"><i class="fas fa-user-tie"></i><span class="link_name">Nhân Viên</span></a></li>
+            <li id="nav-li-promotions"><a href="promotions.html"><i class="fas fa-tags"></i><span class="link_name">Khuyến Mãi</span></a></li>
+            <li>
+                <div class="profile-details">
+                    <a href="#"><i class="fas fa-sign-out-alt"></i><span class="link_name">Đăng Xuất</span></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button">
+                <i class="fas fa-bars sidebarBtn"></i>
+                <span class="dashboard-title">Trang Chủ</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">5</span>
+                 </div>
+                 <div class="action-item message">
+                     <i class="fas fa-envelope"></i>
+                     <span class="badge">3</span>
+                 </div>
+                <div class="profile-dropdown">
+                    <img src="assets/img/admin.webp" alt="Profile Picture" class="profile-pic">
+                    <span class="admin_name">Admin</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <!-- NỘI DUNG CHÍNH CỦA TRANG CHỦ GIỚI THIỆU -->
+            <h2>Chào mừng đến với Trang Quản Lý Cửa Hàng Thức Uống</h2>
+            <p>Đây là nơi bạn có thể quản lý mọi hoạt động của cửa hàng một cách hiệu quả.</p>
+            <div class="card-container">
+                <div class="info-card">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Giới Thiệu</h3>
+                    <p>Hệ thống quản lý toàn diện giúp theo dõi sản phẩm, doanh thu, khách hàng và nhân viên.</p>
+                </div>
+                 <div class="info-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Tính Năng Chính</h3>
+                    <ul>
+                        <li>Quản lý Sản phẩm & Nguyên liệu</li>
+                        <li>Theo dõi Doanh số & Báo cáo</li>
+                        <li>Quản lý Thông tin Khách hàng</li>
+                        <li>Quản lý Nhân viên & Lịch làm việc</li>
+                        <li>Tạo và Quản lý Khuyến mãi</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Hỗ Trợ</h3>
+                    <p>Nếu bạn cần hỗ trợ, vui lòng liên hệ bộ phận kỹ thuật qua email: support@drinkstore.com</p>
+                </div>
+            </div>
+            <!-- KẾT THÚC NỘI DUNG CHÍNH CỦA TRANG CHỦ GIỚI THIỆU -->
+        </div>
+    </section>
+
+    <script src="js/script.js"></script> <!-- JavaScript chung -->
+    <script src="js/pages/home_introduction.js"></script> <!-- JavaScript riêng cho trang này -->
+    <script>
+        // Script nhỏ để thêm class active cho mục menu hiện tại
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeNavItem = document.getElementById('nav-li-home');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

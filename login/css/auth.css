@@ -1,0 +1,162 @@
+/* login/src/css/auth.css */
+:root {
+    --primary-color: #2c3e50; /* Dark Blue-Gray */
+    --secondary-color: #34495e; /* Slightly Lighter Blue-Gray */
+    --accent-color: #3498db; /* Bright Blue */
+    --background-light: #f4f6f9; /* Light Gray */
+    --background-white: #ffffff;
+    --text-dark: #2c3e50;
+    --text-light-gray: #7f8c8d;
+    --border-color: #bdc3c7;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Ngăn cuộn ngang khi chuyển form */
+}
+
+.auth-page-container {
+    width: 100%;
+    max-width: 800px; /* Chiều rộng đủ cho 2 form cạnh nhau */
+    overflow: hidden; /* Quan trọng cho hiệu ứng cuộn */
+}
+
+.auth-form-wrapper {
+    display: flex;
+    width: 200%; /* Gấp đôi chiều rộng để chứa 2 form */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Hiệu ứng cuộn */
+}
+
+.auth-form-container {
+    width: 50%; /* Mỗi form chiếm 50% của wrapper */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form {
+    background-color: var(--background-white);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px; /* Chiều rộng tối đa của mỗi form */
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.auth-header h2 {
+    color: var(--primary-color);
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+}
+.auth-header h2 i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+.auth-header h3 {
+    color: var(--secondary-color);
+    margin: 0 0 25px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+.form-group label i {
+    margin-right: 6px;
+    color: var(--accent-color);
+    width: 16px;
+}
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"], /* Thêm email type */
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+.btn-auth {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.btn-auth i { margin-right: 8px; }
+.btn-auth:hover { background-color: #2980b9; }
+.btn-auth:disabled { background-color: var(--text-light-gray); cursor: not-allowed; }
+
+.toggle-link {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+.toggle-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+.toggle-link a:hover { text-decoration: underline; }
+
+.message-div {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+.message-div.error {
+    background-color: #ffebee;
+    color: var(--danger-color);
+    border-color: #f5c6cb;
+}
+.message-div.success {
+    background-color: #e6ffed;
+    color: var(--success-color);
+    border-color: #c3e6cb;
+}

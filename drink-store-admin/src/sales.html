@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống Kê Doanh Số - Drink Store Admin</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/sales.css"> <!-- CSS riêng cho trang Sales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details"><i class="fas fa-mug-hot logo-icon"></i><span class="logo_name">DrinkAdmin</span></div>
+        <ul class="nav-links">
+            <li id="nav-li-dashboard"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span class="link_name">Dashboard</span></a></li>
+            <li id="nav-li-home"><a href="home_introduction.html"><i class="fas fa-home"></i><span class="link_name">Trang Chủ</span></a></li>
+            <li id="nav-li-products"><a href="products.html"><i class="fas fa-wine-bottle"></i><span class="link_name">Sản Phẩm</span></a></li>
+            <li id="nav-li-sales"><a href="sales.html"><i class="fas fa-chart-line"></i><span class="link_name">Doanh Số</span></a></li>
+            <li id="nav-li-customers"><a href="customers.html"><i class="fas fa-users"></i><span class="link_name">Khách Hàng</span></a></li>
+            <li id="nav-li-staff"><a href="staff.html"><i class="fas fa-user-tie"></i><span class="link_name">Nhân Viên</span></a></li>
+            <li id="nav-li-promotions"><a href="promotions.html"><i class="fas fa-tags"></i><span class="link_name">Khuyến Mãi</span></a></li>
+            <li><div class="profile-details"><a href="#"><i class="fas fa-sign-out-alt"></i><span class="link_name">Đăng Xuất</span></a></div></li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button"><i class="fas fa-bars sidebarBtn"></i><span class="dashboard-title">Thống Kê Doanh Số</span></div>
+            <div class="search-box"><input type="text" placeholder="Tìm kiếm..."><i class="fas fa-search"></i></div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification"><i class="fas fa-bell"></i><span class="badge">5</span></div>
+                 <div class="action-item message"><i class="fas fa-envelope"></i><span class="badge">3</span></div>
+                <div class="profile-dropdown">
+                    <img src="assets/img/admin.webp" alt="Profile Picture" class="profile-pic">
+                    <span class="admin_name">Admin</span><i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content page-content-table"> <!-- Sử dụng class chung cho các trang có table/filter -->
+            <h2>Thống Kê Doanh Số</h2>
+            <div class="filters">
+                 <label for="time-range-sales">Thời gian:</label>
+                 <select id="time-range-sales">
+                     <option value="hourly">Theo Giờ (Hôm nay)</option>
+                     <option value="daily" selected>Theo Ngày (Tháng này)</option>
+                     <option value="monthly">Theo Tháng (Năm nay)</option>
+                     <option value="yearly">Theo Năm</option>
+                 </select>
+                 <button class="btn btn-primary" id="btnFilterSales"><i class="fas fa-filter"></i> Lọc</button>
+            </div>
+
+            <div class="chart-container sales-chart-container"> <!-- Container cho biểu đồ doanh số -->
+                 <div class="title">Biểu Đồ Doanh Thu</div>
+                 <canvas id="salesRevenueChart"></canvas> <!-- ID cho biểu đồ doanh số -->
+            </div>
+
+            <div class="box recent-transactions-box"> <!-- Container cho bảng giao dịch -->
+                 <div class="title">Danh Sách Giao Dịch Gần Đây</div>
+                  <table class="recent-transactions-table"> <!-- Thêm class để style riêng nếu cần -->
+                    <thead>
+                        <tr>
+                            <th>Mã Đơn</th>
+                            <th>Thời Gian</th>
+                            <th>Tổng Tiền</th>
+                            <th>Nhân Viên</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Mã Đơn">#1052</td>
+                            <td data-label="Thời Gian">27/07/2024 10:30</td>
+                            <td data-label="Tổng Tiền">75,000 đ</td>
+                            <td data-label="Nhân Viên">Nguyễn Văn A</td>
+                            <td data-label="Hành Động">
+                                <button class="btn-action btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-action btn-edit" title="Chỉnh sửa hóa đơn"><i class="fas fa-edit"></i></button>
+                                <button class="btn-action btn-delete" title="Xóa hóa đơn"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td data-label="Mã Đơn">#1051</td>
+                            <td data-label="Thời Gian">27/07/2024 09:15</td>
+                            <td data-label="Tổng Tiền">40,000 đ</td>
+                            <td data-label="Nhân Viên">Trần Thị B</td>
+                            <td data-label="Hành Động">
+                                <button class="btn-action btn-view" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn-action btn-edit" title="Chỉnh sửa hóa đơn"><i class="fas fa-edit"></i></button>
+                                <button class="btn-action btn-delete" title="Xóa hóa đơn"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <!-- Thêm các giao dịch khác nếu cần -->
+                    </tbody>
+                </table>
+                <div class="pagination"> <!-- Phân trang cho bảng giao dịch nếu cần -->
+                    <a href="#">«</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">»</a>
+                </div>
+            </div>
+
+            <div class="box top-sales-list sales-page-specific"> <!-- Container cho sản phẩm bán chạy -->
+                <div class="title">Sản phẩm bán chạy nhất (Theo thời gian lọc)</div>
+                <ul>
+                    <li><span class="product">Cà Phê Muối</span><span class="price">15,200,000 đ</span></li>
+                    <li><span class="product">Trà Sữa Trân Châu</span><span class="price">12,800,000 đ</span></li>
+                    <!-- Thêm sản phẩm khác -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/pages/sales.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeNavItem = document.getElementById('nav-li-sales');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

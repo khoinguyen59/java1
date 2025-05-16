@@ -1,0 +1,130 @@
+/* src/css/pages/dashboard.css */
+
+/* Dashboard - Overview Boxes */
+.overview-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+/* .box đã có style chung trong common.css, ở đây chỉ style layout con */
+.overview-boxes .box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.overview-boxes .box .right-side { text-align: left; }
+.overview-boxes .box .box-topic { font-size: 16px; font-weight: 500; color: var(--grey-color); }
+.overview-boxes .box .number { font-size: 28px; font-weight: 600; margin: 5px 0; color: var(--text-color-dark); }
+.overview-boxes .box .indicator { display: flex; align-items: center; font-size: 13px; }
+.overview-boxes .box .indicator i { margin-right: 5px; font-size: 14px; }
+.overview-boxes .box .indicator .fa-arrow-up { color: var(--success-color); }
+.overview-boxes .box .indicator .fa-arrow-down { color: var(--danger-color); }
+.overview-boxes .box .indicator .fa-exclamation-triangle { color: var(--warning-color); }
+
+.overview-boxes .box i.cart { /* Đảm bảo biến --accent-color, etc. được định nghĩa trong common.css */
+    font-size: 32px;
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--background-white);
+    align-self: center;
+}
+.overview-boxes .box i.one { background: var(--accent-color); }
+.overview-boxes .box i.two { background: var(--success-color); }
+.overview-boxes .box i.three { background: var(--warning-color); }
+.overview-boxes .box i.four { background: #e67e22; }
+
+/* Dashboard - Sales Boxes (Chart and Top Sales) */
+.sales-boxes {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+/* .box đã có style chung, đây là style cho title bên trong các box này */
+.sales-boxes .box .title,
+.more-info-boxes .box .title,
+.customer-reviews.box .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+}
+.chart-container { /* Dành riêng cho canvas của chart */
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+}
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.top-sales ul { list-style: none; padding: 0; }
+.top-sales ul li { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; padding-bottom: 10px; border-bottom: 1px solid var(--background-light); }
+.top-sales ul li:last-child { border-bottom: none; padding-bottom: 0; }
+.top-sales ul li a { text-decoration: none; color: var(--text-color-dark); flex-grow: 1; margin-right: 10px; }
+.top-sales ul li .product { font-weight: 500; }
+.top-sales ul li .price { font-weight: 500; color: var(--accent-color); white-space: nowrap; }
+.top-sales ul li .currency { font-size: 0.9em; margin-left: 2px; }
+
+/* Dashboard - More Info Boxes */
+.more-info-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.monthly-revenue { display: flex; flex-direction: column; gap: 5px; }
+.monthly-revenue .revenue-value { font-size: 24px; font-weight: 600; color: var(--text-color-dark); white-space: nowrap; margin-bottom: 0; line-height: 1.2;}
+.monthly-revenue .comparison { font-size: 14px; color: var(--success-color); margin-bottom: 10px; line-height: 1.3;}
+.monthly-revenue .progress-bar { width: 100%; margin-top: auto; } /* Đẩy progress bar xuống dưới nếu box có chiều cao cố định */
+.progress-bar { height: 8px; width: 100%; background-color: var(--background-light); border-radius: 4px; overflow: hidden; }
+.progress { height: 100%; background-color: var(--success-color); border-radius: 4px; }
+
+.whats-new ul, .latest-activity ul { list-style: none; padding-left: 5px; }
+.whats-new li, .latest-activity li { font-size: 14px; margin-bottom: 8px; color: var(--secondary-color); display: flex; align-items: flex-start; }
+.whats-new i, .latest-activity i { margin-right: 8px; color: var(--accent-color); width: 16px; text-align: center; margin-top: 2px; flex-shrink: 0; }
+.whats-new .fa-check-circle { color: var(--success-color); }
+.whats-new .fa-plus-circle { color: var(--info-color); }
+.whats-new .fa-bell { color: var(--warning-color); }
+.latest-activity .fa-user-edit { color: var(--info-color); }
+.latest-activity .fa-receipt { color: var(--success-color); }
+.latest-activity .fa-star { color: var(--warning-color); }
+
+/* Dashboard - Customer Reviews */
+.customer-reviews.box { padding: 20px; /* Có thể không cần grid-column ở đây nếu nó là box đơn */ }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 15px; }
+.review-item { padding: 15px; border: 1px solid var(--background-light); border-radius: 8px; background-color: #fdfdfd; display: flex; flex-direction: column; }
+.review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.customer-name { font-weight: 600; color: var(--text-color-dark); font-size: 15px; }
+.stars i { color: #f1c40f; font-size: 14px; }
+.stars .far { color: var(--grey-color); }
+.review-text { font-size: 14px; color: var(--secondary-color); line-height: 1.6; margin-top: 5px; flex-grow: 1; }
+
+/* Responsive Media Queries cho Dashboard */
+@media (max-width: 1200px) {
+    .sales-boxes {
+        grid-template-columns: 1fr;
+    }
+    .overview-boxes {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+@media (max-width: 768px) {
+    .more-info-boxes,
+    .reviews-grid {
+         grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 576px) {
+     .overview-boxes {
+        grid-template-columns: 1fr;
+    }
+     .sales-boxes .box, .more-info-boxes .box, .overview-boxes .box { /* Áp dụng padding nhỏ hơn cho tất cả box trên mobile */
+         padding: 15px;
+     }
+     .overview-boxes .box .number { /* Giảm font chữ số trên mobile */
+         font-size: 24px;
+     }
+}

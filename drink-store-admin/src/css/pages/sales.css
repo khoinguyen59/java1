@@ -1,0 +1,71 @@
+/* src/css/pages/sales.css */
+
+/* Filters Section (Đã có và có vẻ ổn) */
+.page-content-table .filters {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    background: var(--background-white);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+.page-content-table .filters label {
+    font-weight: 500;
+    margin-right: 5px;
+    color: var(--text-color-dark);
+}
+.page-content-table .filters select {
+    padding: 8px 12px;
+    border: 1px solid var(--grey-color);
+    border-radius: 6px;
+    min-width: 180px;
+    font-size: 14px;
+    background-color: var(--background-white);
+    color: var(--text-color-dark);
+    outline-color: var(--accent-color);
+}
+
+/* Chart Container for Sales Page (Đã có và có vẻ ổn) */
+.chart-container.sales-chart-container {
+    grid-column: 1 / -1;
+    height: 400px;
+    margin-bottom: 20px;
+    background: var(--background-white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+.chart-container.sales-chart-container .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+}
+.chart-container.sales-chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Box chứa bảng giao dịch và danh sách bán chạy */
+.recent-transactions-box .title,
+.top-sales-list.sales-page-specific .title { /* Style chung cho title của các box trên trang sales */
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+}
+
+/* Responsive đặc thù cho filter trên trang Sales (Đã có và có vẻ ổn) */
+@media (max-width: 768px) {
+    .page-content-table .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .page-content-table .filters select,
+    .page-content-table .filters button {
+        width: 100%;
+    }
+}

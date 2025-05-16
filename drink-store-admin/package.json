@@ -1,0 +1,17 @@
+{
+  "name": "drink-store-admin",
+  "version": "1.0.0",
+  "description": "Admin dashboard for a drink store",
+  "main": "src/dashboard.html",
+  "scripts": {
+    "start": "echo \"Mo src/dashboard.html trong trinh duyet cua ban.\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.3"
+  }
+}

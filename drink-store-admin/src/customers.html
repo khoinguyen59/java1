@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Hàng - Drink Store Admin</title>
+    <link rel="stylesheet" href="css/common.css"> <!-- Giữ lại common.css cho các style chung -->
+    <link rel="stylesheet" href="css/customers.css">   <!-- CSS CHÍNH CHO TRANG NÀY -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Nội dung sidebar giữ nguyên -->
+        <div class="logo-details"><i class="fas fa-mug-hot logo-icon"></i><span class="logo_name">DrinkAdmin</span></div>
+        <ul class="nav-links">
+            <li id="nav-li-dashboard"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span class="link_name">Dashboard</span></a></li>
+            <li id="nav-li-home"><a href="home_introduction.html"><i class="fas fa-home"></i><span class="link_name">Trang Chủ</span></a></li>
+            <li id="nav-li-products"><a href="products.html"><i class="fas fa-wine-bottle"></i><span class="link_name">Sản Phẩm</span></a></li>
+            <li id="nav-li-sales"><a href="sales.html"><i class="fas fa-chart-line"></i><span class="link_name">Doanh Số</span></a></li>
+            <li id="nav-li-customers"><a href="customers.html"><i class="fas fa-users"></i><span class="link_name">Khách Hàng</span></a></li>
+            <li id="nav-li-staff"><a href="staff.html"><i class="fas fa-user-tie"></i><span class="link_name">Nhân Viên</span></a></li>
+            <li id="nav-li-promotions"><a href="promotions.html"><i class="fas fa-tags"></i><span class="link_name">Khuyến Mãi</span></a></li>
+            <li><div class="profile-details"><a href="#"><i class="fas fa-sign-out-alt"></i><span class="link_name">Đăng Xuất</span></a></div></li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <!-- Nội dung top-bar giữ nguyên -->
+            <div class="sidebar-button"><i class="fas fa-bars sidebarBtn"></i><span class="dashboard-title">Quản Lý Khách Hàng</span></div>
+            <div class="search-box"><input type="text" id="mainCustomerSearchInput" placeholder="Tìm kiếm khách hàng..."><i class="fas fa-search"></i></div>
+            <div class="top-bar-actions">
+                <div class="action-item notification"><i class="fas fa-bell"></i><span class="badge">5</span></div>
+                <div class="action-item message"><i class="fas fa-envelope"></i><span class="badge">3</span></div>
+                <div class="profile-dropdown"><img src="assets/img/admin.webp" alt="Profile Picture" class="profile-pic"><span class="admin_name">Admin</span><i class="fas fa-chevron-down dropdown-icon"></i><div class="dropdown-content"><a href="#"><i class="fas fa-user"></i> Profile</a><a href="#"><i class="fas fa-cog"></i> Settings</a><a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a></div></div>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <div class="page-header">
+                <h2>Danh Sách Khách Hàng</h2>
+                <button class="btn btn-primary" id="addMainCustomerBtn"><i class="fas fa-user-plus"></i> Thêm Khách Hàng</button>
+            </div>
+
+            <div class="box page-content-table"> <!-- .box và .page-content-table từ common.css -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tên Khách Hàng</th>
+                            <th>Email</th>
+                            <th>Điện Thoại</th>
+                            <th>Ngày Đăng Ký</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mainCustomerTableBody">
+                        <tr><td colspan="6" class="loading-text">Đang tải dữ liệu...</td></tr>
+                    </tbody>
+                </table>
+                <div class="pagination" id="mainCustomerPagination"> <!-- .pagination từ common.css -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL LỚN: Chi Tiết Khách Hàng -->
+    <div id="customerDetailModal" class="modal large-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="customerDetailModalTitle">Chi Tiết Khách Hàng</h3>
+                <span class="close-button" id="closeCustomerDetailModal">×</span>
+            </div>
+            <div class="modal-body" id="customerDetailModalBody">
+                <div class="loading-spinner-container" style="display: none;"><div class="loading-spinner"></div><p>Đang tải...</p></div>
+                <div class="detail-content-wrapper">
+                    <div class="customer-info-header section-box">
+                        <img src="assets/img/customer_avatar_placeholder.png" alt="Ảnh đại diện" class="customer-avatar" id="modalDetailAvatar">
+                        <div class="customer-details">
+                            <h2 id="modalDetailName">Tên Khách Hàng</h2>
+                            <p id="modalDetailEmail"><i class="fas fa-envelope"></i> email@example.com</p>
+                            <p id="modalDetailPhone"><i class="fas fa-phone"></i> 090xxxxxxx</p>
+                            <p id="modalDetailAddress"><i class="fas fa-map-marker-alt"></i> Địa chỉ</p>
+                            <p id="modalDetailRegDate"><i class="fas fa-calendar-alt"></i> Ngày đăng ký</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" id="modalEditCustomerBtn"><i class="fas fa-edit"></i> Sửa</button>
+                    </div>
+                    <div class="chart-summary-grid">
+                        <div class="customer-chart-container section-box">
+                            <div class="title">Tần Suất Quay Lại</div>
+                            <canvas id="modalCustomerReturnFrequencyChart"></canvas>
+                        </div>
+                        <div class="customer-summary-boxes section-box">
+                            <div class="summary-item">
+                                <i class="fas fa-wallet icon"></i>
+                                <div class="text-content">
+                                    <div class="topic">Tổng Tiền Đã Mua</div>
+                                    <div class="value" id="modalTotalAmountSpent">0 đ</div>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-file-invoice-dollar icon"></i>
+                                <div class="text-content">
+                                    <div class="topic">Tổng Hóa Đơn</div>
+                                    <div class="value" id="modalTotalInvoicesCount">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="customer-invoices-list section-box">
+                        <div class="title-bar">
+                            <h3 class="title">Lịch Sử Mua Hàng</h3>
+                        </div>
+                        <div class="page-content-table"> <!-- Tái sử dụng class từ common.css -->
+                            <table>
+                                <thead>
+                                    <tr><th>Mã HĐ</th><th>Ngày Đặt</th><th>Tổng Tiền</th><th>Trạng Thái</th><th>Chi Tiết</th></tr>
+                                </thead>
+                                <tbody id="modalCustomerInvoicesTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="pagination" id="modalCustomerInvoicesPagination"> <!-- Tái sử dụng class từ common.css -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NHỎ: Chi Tiết Hóa Đơn -->
+    <div id="invoiceItemDetailModal" class="modal small-modal">
+        <div class="modal-content">
+             <div class="modal-header">
+                <h4 id="invoiceItemModalTitle">Chi Tiết Hóa Đơn <span id="invoiceItemModalInvoiceId"></span></h4>
+                <span class="close-button" id="closeInvoiceItemModal">×</span>
+            </div>
+            <div class="modal-body" id="invoiceItemModalBody">
+                <p>Đang tải chi tiết hóa đơn...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script> <!-- Script chung cho sidebar, etc. -->
+    <script src="js/customers.js"></script>   <!-- JS CHÍNH CHO TRANG NÀY -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeNavItem = document.getElementById('nav-li-customers');
+            if (activeNavItem) activeNavItem.classList.add('active');
+        });
+    </script>
+</body>
+</html>

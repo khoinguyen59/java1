@@ -1,0 +1,319 @@
+/* css/customers.css */
+
+/* --- Main Customer List Table specific styles (nếu có, ngoài common.css) --- */
+#mainCustomerTableBody .customer-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+#mainCustomerTableBody .placeholder-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--background-light); /* var() từ common.css */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    color: var(--grey-color); /* var() từ common.css */
+    font-size: 18px;
+}
+/* .loading-text, .no-data-text đã có thể được định nghĩa chung hoặc ở đây nếu cần */
+.loading-text, .no-data-text {
+    text-align: center;
+    padding: 20px;
+    color: var(--secondary-color); /* var() từ common.css */
+    font-style: italic;
+}
+
+
+/* --- General Modal Styling (Base) --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Prevent body scroll when modal is open */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity for backdrop */
+    /* Flexbox for centering modal content */
+    align-items: center;
+    justify-content: center;
+}
+.modal.active {
+    display: flex; /* Show the modal */
+}
+
+.modal-content {
+    background-color: var(--background-white); /* var() từ common.css */
+    border-radius: 10px; /* Rounded corners for the modal box */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* Subtle shadow */
+    display: flex;
+    flex-direction: column; /* Stack header, body, footer vertically */
+    max-height: 90vh; /* Max height to prevent overflow on small screens */
+    overflow: hidden; /* Important: content inside .modal-body will scroll */
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--background-light); /* var() từ common.css */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header h3, .modal-header h4 {
+    margin: 0;
+    color: var(--text-color-dark); /* var() từ common.css */
+    font-size: 18px;
+    font-weight: 600;
+}
+.modal-header .close-button {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--grey-color); /* var() từ common.css */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1; /* Align better */
+}
+.modal-header .close-button:hover {
+    color: var(--text-color-dark); /* var() từ common.css */
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto; /* Allow vertical scrolling for modal content */
+    flex-grow: 1; /* Body takes available space */
+}
+
+/* --- MODAL LỚN: Customer Detail Modal --- */
+.large-modal .modal-content {
+    width: 85%; /* Wider modal */
+    max-width: 1200px; /* But not too wide on very large screens */
+}
+
+.loading-spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* Ensure spinner is visible */
+}
+.loading-spinner {
+    border: 4px solid var(--background-light); /* Light grey circle */
+    border-top: 4px solid var(--accent-color); /* Blue spinner part */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading-spinner-container p {
+    margin-top: 10px;
+    color: var(--secondary-color); /* var() từ common.css */
+}
+
+
+/* Layout and sections inside Large Modal Body */
+.modal-body .section-box {
+    background-color: #fdfdfd; /* Slightly different background for sections */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--background-light); /* var() từ common.css */
+    margin-bottom: 20px;
+}
+.modal-body .section-box:last-child {
+    margin-bottom: 0;
+}
+
+/* Customer Info Header in Large Modal */
+.modal-body .customer-info-header {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between avatar and details */
+}
+.modal-body .customer-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--background-light);
+}
+.modal-body .customer-details {
+    flex-grow: 1; /* Details take remaining space */
+}
+.modal-body .customer-details h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: var(--text-color-dark);
+}
+.modal-body .customer-details p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--secondary-color);
+    display: flex; /* Align icon and text */
+    align-items: center;
+}
+.modal-body .customer-details p i {
+    margin-right: 8px;
+    color: var(--accent-color); /* var() từ common.css */
+    width: 16px; /* Consistent icon width */
+    text-align: center;
+}
+.modal-body .customer-info-header .btn-sm { /* Nút sửa */
+    margin-left: auto; /* Push to the right */
+    align-self: flex-start; /* Align with top of flex container */
+}
+
+/* Chart and Summary Grid in Large Modal */
+.chart-summary-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Chart takes more space */
+    gap: 20px;
+}
+.modal-body .customer-chart-container {
+    height: 300px; /* Adjust chart height as needed */
+}
+.modal-body .customer-chart-container .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-color-dark);
+}
+#modalCustomerReturnFrequencyChart { /* Target the canvas ID */
+    width: 100% !important;
+    height: calc(100% - 30px) !important; /* Adjust based on title height */
+}
+
+.modal-body .customer-summary-boxes {
+    display: flex;
+    flex-direction: column; /* Stack summary items vertically */
+    gap: 15px;
+    justify-content: center; /* Center items if space allows */
+}
+.modal-body .summary-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: var(--background-white);
+    border-radius: 6px;
+    border: 1px solid #eee; /* Light border for summary items */
+}
+.modal-body .summary-item .icon {
+    font-size: 28px;
+    margin-right: 15px;
+    padding: 12px;
+    background-color: rgba(52,152,219,0.1); /* Light blue background for icon */
+    border-radius: 50%;
+    width: 50px; /* Fixed icon container size */
+    height: 50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--accent-color);
+}
+.modal-body .summary-item .text-content .topic {
+    font-size: 13px;
+    color: var(--grey-color);
+    margin-bottom: 3px;
+}
+.modal-body .summary-item .text-content .value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+
+/* Invoices List in Large Modal */
+.modal-body .customer-invoices-list .title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.modal-body .customer-invoices-list .title-bar .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color-dark);
+}
+/* Table styles for invoices inside modal (can inherit from common.css .page-content-table) */
+.modal-body .customer-invoices-list .page-content-table th,
+.modal-body .customer-invoices-list .page-content-table td {
+    padding: 8px 10px; /* Slightly smaller padding for modal table */
+    font-size: 13px;
+}
+/* Pagination for invoices inside modal (can inherit from common.css .pagination) */
+.modal-body .customer-invoices-list .pagination {
+    margin-top: 10px;
+    justify-content: flex-end; /* Align pagination to the right */
+}
+.modal-body .customer-invoices-list .pagination a {
+    padding: 5px 8px; /* Smaller pagination buttons */
+    font-size: 12px;
+}
+
+
+/* --- MODAL NHỎ: Invoice Item Detail Modal --- */
+.small-modal {
+    z-index: 1050; /* Higher z-index to appear above the large modal */
+}
+.small-modal .modal-content {
+    width: 60%; /* Smaller width */
+    max-width: 700px; /* Max width for the small modal */
+    max-height: 80vh; /* Max height */
+}
+/* Styles for table inside small modal (invoice items) */
+.small-modal #invoiceItemModalBody table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+.small-modal #invoiceItemModalBody th,
+.small-modal #invoiceItemModalBody td {
+    border: 1px solid var(--background-light);
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+}
+.small-modal #invoiceItemModalBody th {
+    background-color: #f9f9f9; /* Light header for item table */
+    font-weight: 500;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .large-modal .modal-content {
+        width: 95%; /* More width on tablets */
+    }
+    .chart-summary-grid {
+        grid-template-columns: 1fr; /* Stack chart and summary on smaller screens */
+    }
+    .modal-body .customer-chart-container {
+        margin-bottom: 20px; /* Add space when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-body .customer-info-header {
+        flex-direction: column; /* Stack avatar and details */
+        align-items: center; /* Center items */
+        text-align: center;
+    }
+    .modal-body .customer-info-header .btn-sm {
+        margin-left: 0; /* Reset margin */
+        margin-top: 10px; /* Add space below details */
+    }
+    .small-modal .modal-content {
+        width: 90%; /* More width for small modal on phones */
+    }
+}
