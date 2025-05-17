@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Nhân Viên - DrinkStore</title>
+    <!-- Đường dẫn trực tiếp đến file trong src của drink-store-nhanvien -->
+    <link rel="stylesheet" href="src/css/common.css">
+    <link rel="stylesheet" href="src/css/pages/staff_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar staff-sidebar">
+        <div class="logo-details">
+            <i class="fas fa-user-tie logo-icon"></i>
+            <span class="logo_name">Nhân Viên</span>
+        </div>
+        <ul class="nav-links">
+            <li id="nav-li-staff-dashboard" class="active">
+                <a href="staff_dashboard.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+            </li>
+            <li id="nav-li-staff-schedule">
+                <a href="staff_schedule.html">
+                    <i class="far fa-calendar-alt"></i>
+                    <span class="link_name">Đăng Ký Lịch</span>
+                </a>
+            </li>
+            <li id="nav-li-staff-order">
+                <a href="staff_order.html">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span class="link_name">Đặt Hàng</span>
+                </a>
+            </li>
+            <!-- Bỏ nút đăng xuất nếu không còn hệ thống đăng nhập -->
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button">
+                <i class="fas fa-bars sidebarBtn"></i>
+                <span class="dashboard-title">Dashboard Nhân Viên</span>
+            </div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge" id="staffNotificationCount">0</span>
+                 </div>
+                <div class="profile-dropdown">
+                    <!-- Đường dẫn trực tiếp đến file trong src của drink-store-nhanvien -->
+                    <img src="src/assets/img/staff_avatar.png" alt="Staff Avatar" class="profile-pic">
+                    <span class="staff-name-display">Nhân Viên</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user-circle"></i> Hồ Sơ</a>
+                        <a href="#"><i class="fas fa-key"></i> Đổi Mật Khẩu</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <h2>Chào mừng, Nhân Viên!</h2>
+            <div class="staff-info-grid">
+                <div class="info-box staff-salary-box">
+                    <div class="icon"><i class="fas fa-wallet"></i></div>
+                    <div class="info-content">
+                        <span class="info-label">Lương Tháng Này (Tạm tính)</span>
+                        <span class="info-value" id="staffSalaryDisplay">_</span>
+                    </div>
+                </div>
+                <div class="info-box staff-hours-box">
+                    <div class="icon"><i class="fas fa-clock"></i></div>
+                    <div class="info-content">
+                        <span class="info-label">Tổng Giờ Làm (Tháng này)</span>
+                        <span class="info-value" id="staffTotalHoursDisplay">_</span>
+                    </div>
+                </div>
+                <div class="info-box staff-next-shift-box">
+                    <div class="icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="info-content">
+                        <span class="info-label">Ca Làm Tiếp Theo</span>
+                        <span class="info-value small" id="staffNextShiftDisplay">_</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box staff-schedule-summary">
+                <div class="title-with-actions">
+                    <h3>Lịch đã đăng ký (<span id="currentScheduleMonthDisplay">Tháng Hiện tại</span>)</h3>
+                    <div class="actions">
+                        <label for="monthSelectorForSchedule">Xem tháng:</label>
+                        <input type="month" id="monthSelectorForSchedule" name="monthSelectorForSchedule">
+                    </div>
+                </div>
+                <div id="staffRegisteredShiftsCalendar" class="mini-calendar-view">
+                    <p>Lịch làm việc của bạn sẽ hiển thị ở đây...</p>
+                </div>
+                <h4>Danh sách chi tiết ca đã đăng ký:</h4>
+                <ul id="staffRegisteredShiftsList" class="compact-list">
+                    <li class="no-shifts-message">Chưa có ca nào được đăng ký cho tháng này.</li>
+                </ul>
+            </div>
+
+             <div class="box recent-notifications-staff">
+                <div class="title">Thông Báo Gần Đây</div>
+                <ul id="staffNotificationsList">
+                    <li class="no-notifications-message">Hiện chưa có thông báo mới.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Đường dẫn trực tiếp đến file trong src của drink-store-nhanvien -->
+    <script src="src/js/script.js"></script>
+    <script src="src/js/pages/staff_dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bỏ logic kiểm tra token và vai trò nếu không còn đăng nhập
+            const navLinks = document.querySelectorAll('.sidebar .nav-links li');
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeNavItem = document.getElementById('nav-li-staff-dashboard');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+
+            const monthSelector = document.getElementById('monthSelectorForSchedule');
+            const currentScheduleMonthDisplay = document.getElementById('currentScheduleMonthDisplay');
+            if (monthSelector && currentScheduleMonthDisplay) {
+                const today = new Date();
+                const currentYear = today.getFullYear();
+                const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
+                
+                if (!monthSelector.value) {
+                    monthSelector.value = `${currentYear}-${currentMonth}`;
+                }
+                const [year, month] = monthSelector.value.split('-');
+                currentScheduleMonthDisplay.textContent = `Tháng ${month}/${year}`;
+            }
+        });
+    </script>
+</body>
+</html>

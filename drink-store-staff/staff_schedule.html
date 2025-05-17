@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Lịch Làm - DrinkStore</title>
+    <link rel="stylesheet" href="src/css/common.css">
+    <link rel="stylesheet" href="src/css/pages/staff_schedule.css"> <!-- CSS riêng cho trang này -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar staff-sidebar">
+        <div class="logo-details">
+            <i class="fas fa-user-tie logo-icon"></i>
+            <span class="logo_name">Nhân Viên</span>
+        </div>
+        <ul class="nav-links">
+            <li id="nav-li-staff-dashboard">
+                <a href="staff_dashboard.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+            </li>
+            <li id="nav-li-staff-schedule" class="active"> <!-- Mục này active -->
+                <a href="staff_schedule.html">
+                    <i class="far fa-calendar-alt"></i>
+                    <span class="link_name">Đăng Ký Lịch</span>
+                </a>
+            </li>
+            <li id="nav-li-staff-order">
+                <a href="staff_order.html">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span class="link_name">Đặt Hàng</span>
+                </a>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <a href="#" id="staffLogoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="link_name">Đăng Xuất</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav class="top-bar">
+            <div class="sidebar-button">
+                <i class="fas fa-bars sidebarBtn"></i>
+                <span class="dashboard-title">Đăng Ký Lịch Làm</span>
+            </div>
+            <div class="top-bar-actions">
+                 <div class="action-item notification">
+                    <i class="fas fa-bell"></i><span class="badge" id="staffNotificationCount">0</span>
+                 </div>
+                <div class="profile-dropdown">
+                    <img src="assets/img/staff_avatar.png" alt="Staff Avatar" class="profile-pic" id="staffProfilePicOnTopbar">
+                    <span class="staff-name-display" id="staffNameDisplayOnTopbar">Tên NV</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user-circle"></i> Hồ Sơ</a>
+                        <a href="#"><i class="fas fa-key"></i> Đổi Mật Khẩu</a>
+                        <a href="#" id="btnLogoutStaffFromDropdown"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content page-content-table"> <!-- Class chung cho trang có bảng -->
+            <h2>Đăng Ký Ca Làm Việc</h2>
+            <div class="schedule-controls box"> <!-- Box chứa các control -->
+                <div class="filter-group">
+                    <label for="weekSelectorSchedule">Chọn tuần:</label>
+                    <input type="week" id="weekSelectorSchedule" name="weekSelectorSchedule">
+                </div>
+                <button class="btn btn-info" id="btnViewMyScheduleModal"><i class="fas fa-calendar-check"></i> Xem Lịch Đã Đăng Ký Tuần Này</button>
+            </div>
+
+            <div class="available-shifts-container box">
+                <div class="title">Các Ca Làm Việc Có Sẵn (Tuần <span id="currentAvailableWeekDisplay">_</span>)</div>
+                <form id="registerShiftsForm">
+                    <div class="table-responsive-wrapper"> <!-- Wrapper để cuộn ngang trên mobile nếu cần -->
+                        <table class="shifts-table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Ca Làm</th>
+                                    <th>Thời Gian</th>
+                                    <th>SL Cần</th>
+                                    <th>Đã ĐK</th>
+                                    <th>Chọn</th>
+                                </tr>
+                            </thead>
+                            <tbody id="availableShiftsTableBody">
+                                <!-- JS sẽ điền dữ liệu ca làm vào đây -->
+                                <tr><td colspan="6" class="text-center muted">Vui lòng chọn tuần để xem ca làm.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-actions-register">
+                        <button type="submit" class="btn btn-primary" id="btnSubmitRegistration"><i class="fas fa-check-square"></i> Đăng Ký Các Ca Đã Chọn</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Xem Lịch Đã Đăng Ký -->
+            <div id="myScheduleModal" class="modal">
+                <div class="modal-content large">
+                    <span class="close-button" id="closeMyScheduleModalBtn">×</span>
+                    <h3>Lịch Làm Việc Của Tôi (Tuần <span id="myScheduleWeekModalDisplay">_</span>)</h3>
+                    <div class="my-schedule-grid" id="myScheduleVisualTableBody">
+                        <!-- JS sẽ render lịch trực quan hoặc danh sách chi tiết ở đây -->
+                        <p class="text-center muted">Chưa có lịch làm việc cho tuần này.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="src/js/script.js"></script>
+    <script src="src/js/pages/staff_schedule.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.sidebar .nav-links li');
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeNavItem = document.getElementById('nav-li-staff-schedule');
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

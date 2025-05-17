@@ -1,0 +1,130 @@
+/* src/css/pages/staff_schedule.css */
+
+.schedule-controls {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên mobile */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px; /* Giảm padding so với .box chung nếu cần */
+}
+
+.schedule-controls .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.schedule-controls label {
+    font-weight: 500;
+    color: var(--text-color-dark);
+}
+
+.schedule-controls input[type="week"] {
+    padding: 8px 10px;
+    border: 1px solid var(--light-grey-color);
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 200px; /* Đảm bảo đủ rộng */
+}
+
+/* .available-shifts-container kế thừa .box */
+.available-shifts-container .title {
+    /* Kế thừa từ .box .title trong common.css hoặc định nghĩa lại */
+}
+
+.table-responsive-wrapper {
+    overflow-x: auto; /* Cho phép cuộn ngang bảng trên màn hình nhỏ */
+}
+
+.shifts-table {
+    width: 100%;
+    min-width: 600px; /* Đặt min-width để bảng không bị bóp quá nhiều khi cuộn */
+    /* Các style table, th, td, thead, tbody kế thừa từ common.css (.page-content-table table) */
+    /* Hoặc bạn có thể định nghĩa riêng nếu muốn khác biệt */
+}
+
+.shifts-table th, .shifts-table td {
+    white-space: nowrap; /* Giữ nội dung trên 1 dòng cho các ô này */
+    padding: 10px 12px;
+}
+.shifts-table td[data-label="Chọn"] {
+    text-align: center;
+}
+.shifts-table input[type="checkbox"] {
+    transform: scale(1.2); /* Làm checkbox to hơn chút */
+    cursor: pointer;
+}
+
+.form-actions-register {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Modal Xem Lịch */
+/* .modal và .modal-content, .close-button đã có style cơ bản trong common.css */
+.modal-content.large {
+    max-width: 800px; /* Modal rộng hơn cho bảng lịch */
+}
+.modal-content h3 { /* Đã có style chung, có thể ghi đè nếu cần */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.my-schedule-grid {
+    /* Đây là nơi bạn sẽ style cho bảng lịch trực quan */
+    /* Ví dụ nếu dùng CSS Grid: */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 cột cho 7 ngày */
+    gap: 5px;
+    text-align: center;
+    font-size: 13px;
+}
+.my-schedule-grid .day-header {
+    font-weight: bold;
+    padding: 8px 5px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.my-schedule-grid .shift-cell {
+    padding: 10px 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    min-height: 60px; /* Chiều cao tối thiểu cho ô ca */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Nếu có nhiều ca trong 1 ngày */
+}
+.my-schedule-grid .shift-cell.has-shift {
+    background-color: var(--staff-accent-color);
+    color: white;
+    font-weight: 500;
+}
+.my-schedule-grid .shift-time {
+    display: block;
+    font-size: 0.9em;
+}
+
+
+.text-center { text-align: center; }
+.muted { color: var(--grey-color); }
+
+@media (max-width: 768px) {
+    .schedule-controls {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch; /* Cho các control chiếm full width */
+    }
+    .schedule-controls .filter-group,
+    .schedule-controls button {
+        width: 100%;
+    }
+    .schedule-controls input[type="week"]{
+        width: 100%;
+    }
+}

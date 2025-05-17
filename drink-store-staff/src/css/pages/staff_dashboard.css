@@ -1,0 +1,108 @@
+/* src/css/pages/staff_dashboard.css */
+
+.staff-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* .info-box kế thừa style .box từ common.css (nền trắng, shadow, padding cơ bản) */
+/* Chúng ta chỉ cần định nghĩa layout con của nó */
+.info-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-box .icon {
+    font-size: 2.2em;
+    min-width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--background-white);
+}
+
+.staff-salary-box .icon { background-color: var(--success-color); }
+.staff-hours-box .icon { background-color: var(--info-color); }
+.staff-next-shift-box .icon { background-color: var(--warning-color); }
+
+.info-box .info-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-box .info-label {
+    font-size: 13px;
+    color: var(--grey-color);
+    margin-bottom: 4px;
+}
+
+.info-box .info-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color-dark);
+    line-height: 1.2;
+}
+.info-box .info-value.small { /* Cho Ca Làm Tiếp Theo */
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* staff-schedule-summary kế thừa .box, .title-with-actions từ common.css */
+.staff-schedule-summary h4 { /* Tiêu đề "Danh sách chi tiết ca đã đăng ký" */
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color-dark);
+    margin-top: 20px; /* Khoảng cách với phần trên */
+    margin-bottom: 10px;
+}
+
+.mini-calendar-view {
+    min-height: 150px;
+    border: 1px solid var(--light-grey-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--grey-color);
+    background-color: #fcfcfc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* recent-notifications-staff kế thừa .box, .title từ common.css */
+.recent-notifications-staff ul {
+    list-style: none;
+    padding-left: 0;
+}
+.recent-notifications-staff li {
+    display: flex;
+    align-items: flex-start; /* align-items: start để icon và text dài thẳng hàng tốt hơn */
+    gap: 10px;
+    padding: 10px 0; /* Tăng padding */
+    font-size: 14px;
+    color: var(--secondary-color);
+    border-bottom: 1px dashed #f1f1f1;
+}
+.recent-notifications-staff li:last-child { border-bottom: none; }
+.recent-notifications-staff li i {
+    color: var(--info-color);
+    font-size: 1.1em;
+    width: 20px; /* Đảm bảo icon có không gian */
+    text-align: center;
+    margin-top: 2px; /* Căn chỉnh icon với dòng text đầu tiên */
+    flex-shrink: 0; /* Không cho icon co lại */
+}
+
+.no-shifts-message, .no-notifications-message {
+    color: var(--grey-color);
+    font-style: italic;
+    padding: 10px 5px;
+    text-align: center; /* Căn giữa nếu muốn */
+}
